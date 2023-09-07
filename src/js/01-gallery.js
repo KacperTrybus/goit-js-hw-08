@@ -1,40 +1,33 @@
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
 // Add imports above this line
-import { galleryItems } from './gallery-items';
+import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const galleryList = document.querySelector('.gallery');
 
 galleryItems.forEach(image => {
   const newLiItem = document.createElement('li');
-  const newDiv = document.createElement('div');
+  const newImage = document.createElement('img');
   const newLink = document.createElement('a');
-  newLink.setAttribute('href', `${image.original}`);
+  newLink.className = 'gallery__item';
+  newLink.setAttribute('href', `${image.original}`); // href do a
   newLink.addEventListener('click', event => {
     event.preventDefault();
   });
-  const newImage = document.createElement('img');
-  newImage.className = 'gallery__image';
-  newImage.src = image.preview;
-  newImage.setAttribute('data-source', `${image.original}`);
-  newImage.alt = 'Image description';
 
-  galleryList.append(newLiItem); // li do ul
+  galleryList.append(newLiItem); //li do ul
+  newLiItem.append(newLink); //a do li
+  newLink.append(newImage); // img do a
 
-  newLiItem.append(newDiv); //div do li
-  newDiv.classList.add('gallery__item');
+  newImage.classList.add('gallery__image'); //klasa do img
+  newImage.src = image.preview; // src do img
+  newImage.alt = 'Image description'; // desc
+});
 
-  newDiv.append(newLink); //a do div
-  newLink.classList.add('gallery__link');
-
-  newLink.append(newImage); //img do a
-  newImage.classList.add('gallery__image');
-
-  newDiv.addEventListener('click', displayOriginalImg);
-
-  function displayOriginalImg() {
-    const bigImage = basicLightbox.create(`<img src="${image.original}">`);
-    bigImage.show();
-  }
+let galleryLightbox = new SimpleLightbox('.gallery__item', {
+  captionType: 'attr',
+  captionSelector: 'img',
+  captionsData: 'alt',
+  captionDelay: 250,
 });
