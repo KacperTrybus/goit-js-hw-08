@@ -1,12 +1,19 @@
 import Player from '@vimeo/player';
 
-// getCurrentTime(): Promise<number, Error>
-// Get the current playback position in seconds.
+const onPlay = function (data) {
+  const item = {
+    playtime: data,
+  };
+  const save = localStorage.setItem(
+    'videoplayer-current-time',
+    JSON.parse(item)
+  );
 
-// player.getCurrentTime().then(function(seconds) {
-// seconds = the current playback position
-// }).catch(function(error) {
-// an error occurred
-// });
+  const playtimeNum = JSON.parse(
+    localStorage.getItem('videoplayer-current-time')
+  );
+};
 
-localStorage.setItem('videoplayer-current-time', 'playtime');
+player.on('timeupdate', onPlay);
+czas;
+player.setCurrentTime(playtimeNum);
