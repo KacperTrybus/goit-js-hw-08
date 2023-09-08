@@ -11,18 +11,18 @@ galleryItems.forEach(image => {
   const newImage = document.createElement('img');
   const newLink = document.createElement('a');
   newLink.className = 'gallery__item';
-  newLink.setAttribute('href', `${image.original}`); // href do a
+  newLink.setAttribute('href', `${image.original}`);
   newLink.addEventListener('click', event => {
     event.preventDefault();
   });
 
-  galleryList.append(newLiItem); //li do ul
-  newLiItem.append(newLink); //a do li
-  newLink.append(newImage); // img do a
+  galleryList.append(newLiItem);
+  newLiItem.append(newLink);
+  newLink.append(newImage);
 
-  newImage.classList.add('gallery__image'); //klasa do img
-  newImage.src = image.preview; // src do img
-  newImage.alt = 'Image description'; // desc
+  newImage.classList.add('gallery__image');
+  newImage.src = image.preview;
+  newImage.alt = 'Image description';
 });
 
 let galleryLightbox = new SimpleLightbox('.gallery__item', {
