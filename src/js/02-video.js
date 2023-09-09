@@ -2,7 +2,7 @@ import Player from '@vimeo/player';
 var throttle = require('lodash.throttle');
 
 function timeupdateFunc(data) {
-  savedTime = data.seconds;
+  let savedTime = data.seconds;
   localStorage.setItem('videoplayer-current-time', savedTime);
 }
 const timeupdateFuncThrottle = throttle(timeupdateFunc, 1000);
